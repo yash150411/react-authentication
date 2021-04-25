@@ -45,7 +45,6 @@ function Login() {
         reset();
       })
       .catch(err => {
-        if(!err.respponse) return console.log(err);
         setLoading(false);
         setMessage(undefined);
         setError(err.response.data.message);
