@@ -41,7 +41,7 @@ function Login() {
         setMessage(resp.data.message);
         setInterval(() => {
           setMessage('');
-        },2000);
+        },5000);
         reset();
       })
       .catch(err => {
