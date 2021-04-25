@@ -12,26 +12,47 @@ function Login() {
   const [loading, setLoading] = useState();
   const [message, setMessage] = useState();
 
-  const handleLogin = (data) => {
+  const getIpAddress = () => {
+    return new Promise((resolve,reject) => {
+      axios.get('https://ipapi.co/json/')
+      .then((response) => {
+        const ip = response.data.ip;
+        resolve(ip);
+      }).catch((error) => {
+        reject(error);
+      });
+    })
+  }
+
+  const handleLogin = async (data) => {
     if(data.password.length < 4) return setError('Incorrect Password');
-    setLoading(true);
-    setError(undefined);
-    const url = `${process.env.REACT_APP_API_URL}/api/auth/login`;
+    try{
+      setLoading(true);
+      setError(undefined);
+      const ip = await getIpAddress();
+      const url = `${process.env.REACT_APP_API_URL}/api/auth/login`;
       axios({
         method: 'post', url,
-        data: {email: data.email, password: data.password}
+        data: {email: data.email, password: data.password, ip}
       })
       .then(resp => {
         setLoading(false);
         sessionStorage.setItem('token', resp.data.token);
         setMessage(resp.data.message);
+        setInterval(() => {
+          setMessage('');
+        },2000);
         reset();
       })
       .catch(err => {
+        if(!err.respponse) return console.log(err);
         setLoading(false);
         setMessage(undefined);
         setError(err.response.data.message);
       })
+    }catch(e){
+      console.log(e);
+    }
   }
 
   return (
