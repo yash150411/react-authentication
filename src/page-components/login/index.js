@@ -62,7 +62,7 @@ function Login() {
         <input className="form-input" type="email" name="email" id="email" placeholder="Email" {...register('email', { required: true })}/>
         <div className="form-errors">{errors.email && <p>Email is required.</p>}</div>
         <input className="form-input" type="password" placeholder="Password" {...register('password', { required: true })}/>
-        <div className="form-errors">{errors.email && <p>Email is required.</p>}</div>
+        <div className="form-errors">{errors.password && <p>Password is required.</p>}</div>
         {error && <p className="form-errors">{error}</p>}
         {loading 
           ? <button disabled className="submit" style={{cursor:'pointer'}}>Logging In...</button>
