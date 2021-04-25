@@ -112,7 +112,7 @@ function Register() {
 
   return (
     <div className="main">
-      <p className="login">Register {process.env.REACT_APP_API_URL}</p>
+      <p className="login">Register</p>
       {state.message && <p className="message">{state.message}</p>}
       <form onSubmit={handleSubmit(handleRegisterRequest)} className="form1">
         <input 

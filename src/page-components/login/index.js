@@ -39,7 +39,7 @@ function Login() {
       <p className="login">Login</p>
       {message && <p className="message">{message}</p>}
       <form onSubmit={handleSubmit(handleLogin)} className="form1">
-        <input className="form-input" type="text" placeholder="Email" {...register('email', { required: true })}/>
+        <input className="form-input" type="email" name="email" id="email" placeholder="Email" {...register('email', { required: true })}/>
         <div className="form-errors">{errors.email && <p>Email is required.</p>}</div>
         <input className="form-input" type="password" placeholder="Password" {...register('password', { required: true })}/>
         <div className="form-errors">{errors.email && <p>Email is required.</p>}</div>
