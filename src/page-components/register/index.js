@@ -46,7 +46,7 @@ const reducer = (state, action) => {
     case 'pre_request':
       return{
         ...state,
-        loading: false,
+        loading: true,
         error: undefined
       }
     case 'set_error':
@@ -93,7 +93,7 @@ function Register() {
       dispatch({type:'set_error', message: 'Incorrect OTP'});
     }else{
       if(data.password.length < 4) return dispatch({type:'set_error', message:'Password too short'});
-      dispatch({type:'set_error', message: undefined});
+      dispatch({type:'pre_request'});
       const url = `${process.env.REACT_APP_API_URL}/api/auth/register/verify`;
       axios({
         method: 'post', url,
